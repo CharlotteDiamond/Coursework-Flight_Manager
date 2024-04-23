@@ -13,6 +13,7 @@ class GUI:
     self.root.geometry("730x400")
     self.root.configure(bg='#E6E6FA')
     self.connection = sqlite3.connect("terminal.db")
+    self.conn.execute('PRAGMA foreign_keys = ON')
     self.cursor = self.connection.cursor()
     self.selected = {}  # Use in delete_operation
     self.backup = {}  # Use in delete_operation

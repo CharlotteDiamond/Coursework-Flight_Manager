@@ -1,0 +1,130 @@
+--create all tables
+create table pilot (
+  pilot_id integer primary key autoincrement,
+  pilot_name varchar(20) not null
+);
+create table aircraft (
+  aircraft_id integer primary key autoincrement,
+  aircraft_type varchar(30) unique not null
+);
+create table flight (
+  flight_id integer primary key autoincrement,
+  aircraft_id int not null,
+  flight_date date not null,
+  start_time time not null,
+  start_place varchar(20) not null,
+  start_port varchar(5) not null,
+  end_time time not null,
+  end_place varchar(30) not null,
+  end_port varchar(5) not null,
+  foreign key (aircraft_id) references aircraft(aircraft_id)
+);
+create table who_drove_plane (
+  flight_id integer,
+  pilot_id int,
+  role varchar(10) not null,
+  foreign key (flight_id) references flight(flight_id),
+  foreign key (pilot_id) references pilot(pilot_id)
+);
+--insert data
+insert into pilot (pilot_id, pilot_name)
+values 
+  (1, 'Angelica Abernathy'),
+  (2, 'Luna Billingsworth'),
+  (3, 'Lillian Clarington'),
+  (4, 'Vivian Drummund'),
+  (5, 'Cleopatra Ellsworth'),
+  (6, 'Antoinette Fairchild'),
+  (7, 'Charlotte Diamond'),
+  (8, 'Crystal Galloway'),
+  (9, 'Chanel Haverford'),
+  (10, 'Isabella Inglewood'),
+  (11, 'Amen Aamir'),
+  (12, 'Margaret Adams'),
+  (13, 'Zoya Agarwal'),
+  (14, 'Pancho Barnes'),
+  (15, 'Katherine Cheung'),
+  (16, 'Linda Corbould'),
+  (17, 'Millicent Bryant'),
+  (18, 'Betty Gillies'),
+  (19, 'Kathleen Fox'),
+  (20, 'Pamela Melroy');
+insert into aircraft (aircraft_id, aircraft_type)
+values
+  (1, 'Boeing 737-800'),
+  (2, 'ATR ATR-42-300/320'),
+  (3, 'BOMBARDIER Challenger 300'),
+  (4, 'BOEING 787-10 Dreamliner'),
+  (5, 'Airbus A320'),
+  (6, 'Embraer E190'),
+  (7, 'Bombardier Global 6000'),
+  (8, 'Boeing 777-300ER'),
+  (9, 'Airbus A350'),
+  (10, 'Cessna Citation X'),
+  (11, 'Airbus A380'),
+  (12, 'Gulfstream G650'),
+  (13, 'Boeing 737 MAX 8'),
+  (14, 'Dassault Falcon 7X');
+insert into flight (flight_id, aircraft_id, flight_date, start_place, end_place, start_port, end_port, start_time, end_time)
+values
+  (1, 1, '2023-11-18', 'Beijing', 'London', 'PEK', 'LHR', '08:00', '12:00'),
+  (2, 2, '2023-11-19', 'Beijing', 'Rome', 'PEK', 'FCO', '10:00', '14:00'),
+  (3, 3, '2023-11-20', 'Beijing', 'Shanghai', 'PEK', 'SHA', '09:00', '11:00'),
+  (4, 4, '2023-11-21', 'Beijing', 'London', 'PEK', 'LHR', '13:00', '17:00'),
+  (5, 1, '2023-11-22', 'Tianjin', 'Zibo', 'TSN', 'ZBO', '15:00', '18:00'),
+  (6, 2, '2023-11-23', 'Zibo', 'Boston', 'ZBO', 'BOS', '14:00', '20:00'),
+  (7, 3, '2023-11-24', 'Zibo', 'Sydney', 'ZBO', 'SYD', '12:00', '18:00'),
+  (8, 4, '2023-11-25', 'Qingdao', 'Hangzhou', 'TAO', 'HGH', '09:00', '12:00'),
+  (9, 1, '2023-11-26', 'London', 'Hangzhou', 'LHR', 'HGH', '08:00', '15:00'),
+  (10, 2, '2023-11-21', 'London', 'Paris', 'LHR', 'CDG', '16:00', '18:00'),
+  (11, 3, '2023-11-21', 'Zibo', 'Paris', 'ZBO', 'CDG', '14:00', '16:00'),
+  (12, 4, '2023-11-21', 'Zibo', 'Beijing', 'ZBO', 'PEK', '17:00', '19:00'),
+  (13, 1, '2023-11-25', 'Zibo', 'Shanghai', 'ZBO', 'SHA', '10:00', '12:00'),
+  (14, 2, '2023-11-25', 'Zibo', 'Sydney', 'ZBO', 'SYD', '13:00', '19:00'),
+  (15, 3, '2023-11-25', 'Suzhou', 'Guangzhou', 'SZV', 'CAN', '15:00', '21:00'),
+  (16, 4, '2023-11-24', 'Guangzhou', 'London', 'CAN', 'LHR', '12:00', '16:00'),
+  (17, 1, '2023-11-24', 'Zibo', 'Taoyuan', 'ZBO', 'TPE', '14:00', '18:00'),
+  (18, 2, '2023-11-24', 'Zibo', 'Hengchun', 'ZBO', 'HCN', '11:00', '15:00'),
+  (19, 3, '2023-11-23', 'Qingdao', 'Sydney', 'TAO', 'SYD', '09:00', '14:00'),
+  (20, 4, '2023-11-23', 'Qindao', 'Paris', 'TAO', 'CDG', '13:00', '16:00'),
+  (21, 1, '2023-11-23', 'Paris', 'London', 'CDG', 'LHR', '10:00', '12:00'),
+  (22, 2, '2023-11-28', 'Paris', 'Guangdong', 'CDG', 'CAN', '15:00', '20:00'),
+  (23, 3, '2023-11-28', 'Paris', 'Milan', 'CDG', 'MXP', '13:00', '15:00'),
+  (24, 4, '2023-11-29', 'Milan', 'London', 'MXP', 'LHR', '14:00', '18:00');
+insert into who_drove_plane (flight_id, pilot_id, role)
+values
+  (1,1,'Captain'),
+  (1,2,'Co-Pilot'),
+  (2,3,'Captain'),
+  (2,4,'Co-Pilot'),
+  (3,5,'Captain'),
+  (3,6,'Co-Pilot'),
+  (4,7,'Captain'),
+  (4,8,'Co-Pilot'),
+  (5,9,'Captain'),
+  (5,10,'Co-Pilot'),
+  (6,1,'Captain'),
+  (7,2,'Captain'),
+  (8,3,'Captain'),
+  (9,4,'Captain'),  
+  (10,5,'Captain'),
+  (11,6,'Captain'),
+  (12,7,'Captain'),
+  (13,8,'Captain'),
+  (14,9,'Captain'),
+  (15,10,'Captain'),
+  (16,7,'Captain'),
+  (17,7,'Captain'),
+  (18,7,'Captain'),
+  (19,7,'Captain'),
+  (20,7,'Captain'),
+  (21,7,'Captain'),
+  (22,7,'Captain'),
+  (23,7,'Captain'),
+  (24,1,'Captain'),
+  (24,2,'Co-Pilot'),
+  (24,3,'Navigator'),
+  (23,9,'Captain'),
+  (23,6,'Co-Pilot'),
+  (23,10,'Navigator');
+  

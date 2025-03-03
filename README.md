@@ -1,4 +1,4 @@
-# Flight_Manager User Manual
+# User Manual
 
 1. Procedure: Welcome->Function->Table->Operation
 2. Add: Regarding the input of added functions, I originally wanted to make it all horizontally arranged, that is, 4 boxes in a row, two column names and two input boxes, but after the program finally ran successful, I was afraid that I would make the wrong changes again, and I made many changes. I found that I don't know how to achieve this effect, so I can only run it as it is now.
